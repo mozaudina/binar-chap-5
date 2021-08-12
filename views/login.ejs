@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+<div id="card"> 
+    <div id="card-content">
+    </div>
+    <div id="card-title">
+        <h2>LOGIN</h2>
+    </div>
+
+    <form method="post" class="form">
+
+        <label for="user-email" style="padding-top:13px">&nbsp;Email</label>
+      <input
+       id="user-email"
+       class="form-content"
+       type="email"
+       name="email"
+       autocomplete="on"
+       required />
+      <div class="form-border"></div>
+    <label for="user-password" style="padding-top:22px">&nbsp;Password</label>
+      <input
+       id="user-password"
+       class="form-content"
+       type="password"
+       name="password"
+       required />
+      <div class="form-border"></div>
+      <button type="submit" onclick="onClick()">Submit</button>
+    <a href="#"><legend id="forgot-pass">Forgot password?</legend></a>
+    </form>
+</div>
+
+
+
+<style>
+    #card {
+        background: #fbfbfb;
+        border-radius: 8px;
+        box-shadow: 1px 2px 8px rgba(0, 0, 0, 0.65);
+        height: 410px;
+        margin: 6rem auto 8.1rem auto;
+        width: 329px;
+
+        #card-content {
+      padding: 12px 44px;
+}
+#card-title {
+      font-family: "Raleway Thin", sans-serif;
+      text-align: center;
+}
+
+</style>
+
+
+<script>
+  let onClick = () => {
+    let username = document.getElementById("email")
+    let password = document.getElementById("password")
+    let config = {
+      method: "post",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        username: username.value,
+        password: password.value
+      })
+    }
+    fetch("/login", config)
+      .then(response => response.json())
+      .then(result => {
+        console.log(result)
+        if (result.message === "Login Berhasil") {
+          alert(result.message)
+          window.location.href = "/"
+        }
+      })
+      .catch(err => console.log(err))
+    username = ""
+    password = ""
+  }
+</script>
+
+
+
+
+</body>
+</html>

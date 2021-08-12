@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style/game.css">
+    <title>Challage chap 4</title>
+</head>
+<body>
+<section id="sec1">
+<div class="game">
+    <p>ROCK PAPER SCISSORS</p>
+</div>
+
+<div class="kiri">
+    <p>PLAYER 1</p>
+    <ul>
+        <li class="playerbatu">
+            <img src="assets/batu.png">
+        </li>
+        <li class="playerkertas">
+            <img src="assets/kertas.png">
+        </li>
+        <li class="playergunting">
+            <img src="assets/gunting.png">
+        </li>
+    </ul>
+</div>
+
+<div class="info">
+</div>
+
+
+<div class="tengah">
+    <h1>VS</h1>
+    <img src="assets/refresh.png">
+</div>
+
+<div class="com">
+    <p>COM</p>
+    <div class="combatu">
+        <img src="assets/batu.png" alt="">
+    </div>
+    <div class="comkertas">
+        <img src="assets/kertas.png" alt="">
+    </div>
+    <div class="comgunting">
+        <img src="assets/gunting.png" alt="">
+    </div>
+</div>
+
+</section>    
+
+<script>
+
+function PilihanCom() {
+    const comp = Math.random();
+    if( comp < 0.34 ) return 'combatu';
+    if( comp >= 0.34 && comp < 0.67 ) return 'comkertas';
+    return 'comgunting'
+}
+
+function playHasil(comp, player) {
+    if( player == comp ) return 'DRAW';
+    if( player == 'playerbatu' ) return ( comp == 'comkertas') ? 'COM WIN' : 'PLAYER 1 WIN';
+    if( player == 'playerkertas' ) return ( comp == 'combatu' ) ? 'PLAYER 1 WIN' : 'COM WIN';
+    if( player == 'playergunting') return ( comp == 'comkertas') ? 'PLAYER 1 WIN' : 'COM WIN';
+}
+
+const PlayerBatu = document.querySelector('.playerbatu');
+PlayerBatu.addEventListener('click', function() {
+    const PilihanComputer = PilihanCom();
+    const PilihanPlayer = PlayerBatu.className;
+    const Hasil = playHasil(PilihanComputer, PilihanPlayer);
+
+    const info = document.querySelector('.info');
+    info.innerHTML = Hasil;
+});
+
+
+const PlayerKertas = document.querySelector('.playerkertas');
+PlayerKertas.addEventListener('click', function() {
+    const PilihanComputer = PilihanCom();
+    const PilihanPlayer = PlayerKertas.className;
+    const Hasil = playHasil(PilihanComputer, PilihanPlayer);
+
+    const info = document.querySelector('.info');
+    info.innerHTML = Hasil;
+});
+
+
+const PlayerGunting = document.querySelector('.playergunting');
+PlayerGunting.addEventListener('click', function() {
+    const PilihanComputer = PilihanCom();
+    const PilihanPlayer = PlayerGunting.className;
+    const Hasil = playHasil(PilihanComputer, PilihanPlayer);
+
+    const info = document.querySelector('.info');
+    info.innerHTML = Hasil;
+});
+
+</script>
+
+</body>
+</html>
